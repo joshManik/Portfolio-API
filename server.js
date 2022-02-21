@@ -23,9 +23,8 @@ DB.connect()
 
 // Create Inital Tables upon start
 
-const initialQuery = `CREATE TABLE IF NOT EXISTS uploadTest (
+const initialQuery = `CREATE TABLE IF NOT EXISTS photoTest (
     id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
-    photo1 MEDIUMBLOB NOT NULL,
     path VARCHAR(255) NOT NULL
 )`
 DB.query(initialQuery, (err) => {
@@ -34,12 +33,16 @@ DB.query(initialQuery, (err) => {
 });
 
 app.get('/pastprojects/all', (req, res) => {
-    const QUERY = `SELECT * FROM uploadTest`
+    const QUERY = `SELECT * FROM photoTest`
     DB.query(QUERY, (err, result) => {
         if (err) throw err;
         res.send(result)
     });
 });
+
+app.post('/pastprojects/create', (req, res) => {
+    const QUERY = ``
+})
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server is running on port : ${process.env.SERVER_PORT}`)
