@@ -44,7 +44,7 @@ app.get('/pastproject/:id', (req, res) => {
     })
 });
 
-app.post('/pastproject/:id', uploader.array('images', 3), (req, res) => {
+app.put('/pastproject/:id', uploader.array('images', 3), (req, res) => {
     const update = {
         title : req.body.title,
         path : req.files[0].path 
@@ -54,6 +54,14 @@ app.post('/pastproject/:id', uploader.array('images', 3), (req, res) => {
         if (err) throw err;
         res.send(result)
     });
+});
+
+app.delete('/pastproject/:id', (req, res) => {
+    QUERY = `DELETE FROM ${DB_TABLE} WHERE id = ${req.params.id}`
+    DB.query(QUERY, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    })
 });
 
 app.get('/pastprojects/all', (req, res) => {
