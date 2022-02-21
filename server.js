@@ -27,7 +27,7 @@ DB.connect()
 
 const initialQuery = `CREATE TABLE IF NOT EXISTS ${DB_TABLE} (
     id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL
+    title VARCHAR(255) NOT NULL,
     path VARCHAR(255) NOT NULL
 )`
 DB.query(initialQuery, (err) => {
