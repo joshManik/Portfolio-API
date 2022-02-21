@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  mysqlDB:
+    image: mysql:latest
+    env_file:
+      - ./.env
+    enviroment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASS
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $d
+    
