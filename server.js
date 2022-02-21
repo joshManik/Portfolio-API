@@ -35,6 +35,27 @@ DB.query(initialQuery, (err) => {
     console.log("Created inital table")
 });
 
+app.get('/pastproject/:id', (req, res) => {
+    QUERY = `SELECT * FROM ${DB_TABLE} WHERE id = ${req.params.id}`
+    DB.query(QUERY, (err, result) => {
+        if (err) throw err;
+
+        res.send(result)
+    })
+});
+
+app.post('/pastproject/:id', uploader.array('images', 3), (req, res) => {
+    const update = {
+        title : req.body.title,
+        path : req.files[0].path 
+    }
+    QUERY = `UPDATE ${DB_TABLE} SET ? WHERE id = ${req.params.id}`
+    DB.query(QUERY, update, (err, result) => {
+        if (err) throw err;
+        res.send(result)
+    });
+});
+
 app.get('/pastprojects/all', (req, res) => {
     const QUERY = `SELECT * FROM ${DB_TABLE}`
     DB.query(QUERY, (err, result) => {
@@ -44,16 +65,18 @@ app.get('/pastprojects/all', (req, res) => {
 });
 
 app.post('/pastprojects/create', uploader.array('images', 3), (req, res) => {
-    console.log(req.body.title)
-    console.log(req.files[0].path)
-    // const QUERY = `INSERT INTO ${DB_TABLE} SET ?`
-    // DB.query(QUERY, upload, (err, row) => {
-    //     if (err) throw err;
+    const upload = {
+        title : req.body.title,
+        path : req.files[0].path
+    }
+    const QUERY = `INSERT INTO ${DB_TABLE} SET ?`
+    DB.query(QUERY, upload, (err, row) => {
+        if (err) throw err;
 
-    //     console.log(row)
+        console.log(row)
 
-    //     res.send(row)
-    // })
+        res.send(row)
+    })
 })
 
 app.listen(process.env.SERVER_PORT, () => {
