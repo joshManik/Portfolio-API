@@ -12,6 +12,8 @@ app.use(cors());
 
 require('dotenv').config();
 
+const DB_TABLE = process.env.DB_TABLE_NAME
+
 const DB = mysql.createConnection({
     user : process.env.DB_USER,
     password : process.env.DB_PASSWORD,
@@ -23,8 +25,9 @@ DB.connect()
 
 // Create Inital Tables upon start
 
-const initialQuery = `CREATE TABLE IF NOT EXISTS photoTest (
+const initialQuery = `CREATE TABLE IF NOT EXISTS ${DB_TABLE} (
     id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL
     path VARCHAR(255) NOT NULL
 )`
 DB.query(initialQuery, (err) => {
@@ -33,7 +36,7 @@ DB.query(initialQuery, (err) => {
 });
 
 app.get('/pastprojects/all', (req, res) => {
-    const QUERY = `SELECT * FROM photoTest`
+    const QUERY = `SELECT * FROM ${DB_TABLE}`
     DB.query(QUERY, (err, result) => {
         if (err) throw err;
         res.send(result)
@@ -41,7 +44,14 @@ app.get('/pastprojects/all', (req, res) => {
 });
 
 app.post('/pastprojects/create', (req, res) => {
-    const QUERY = ``
+    const QUERY = `INSERT INTO ${DB_TABLE} SET ?`
+    DB.query(QUERY, upload, (err, row) => {
+        if (err) throw err;
+
+        console.log(row)
+
+        res.send(row)
+    })
 })
 
 app.listen(process.env.SERVER_PORT, () => {
