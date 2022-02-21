@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const multer = require('multer');
+const { Console } = require('console');
 
 const uploader = multer({ dest : './uploads'});
 
@@ -38,6 +39,10 @@ app.get('/pastprojects/all', (req, res) => {
         if (err) throw err;
         res.send(result)
     });
+});
+
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server is running on port : ${process.env.SERVER_PORT}`)
 });
 
 
