@@ -2,7 +2,6 @@ const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const multer = require('multer');
-const { Console } = require('console');
 
 const uploader = multer({ dest : './uploads'});
 
@@ -31,6 +30,7 @@ const initialQuery = `CREATE TABLE IF NOT EXISTS uploadTest (
 )`
 DB.query(initialQuery, (err) => {
     if (err) throw err;
+    console.log("Created inital table")
 });
 
 app.get('/pastprojects/all', (req, res) => {
