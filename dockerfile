@@ -3,10 +3,10 @@ FROM node:16.13.0
 WORKDIR /server 
 
 
-COPY /server ./server
+COPY . .
 
-RUN npm i
+RUN npm i express multer dotenv mysql2 cors
 
 EXPOSE 8000
 
-CMD node server/server.js
+CMD node server.js
