@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   mysqldb:
-    image: mysql:5.7
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     env_file: ./.env
     environment:
@@ -20,8 +21,6 @@ services:
       dockerfile: dockerfile
     env_file:
       - ./.env
-    links:
-      - "mysqldb:database"
     networks:
       - backend
 networks:
