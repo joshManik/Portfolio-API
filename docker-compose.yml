@@ -9,5 +9,11 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $DB_PORT:3306
+  
+  express:
+    depends_on:
+      - mysqlDB
+    image: portfolioapi
     
+
     
