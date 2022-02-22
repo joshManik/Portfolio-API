@@ -105,5 +105,4 @@ dist
 .tern-port
 
 # Node Stuff
-package.json
-package-lock.json
+.json
