@@ -8,5 +8,6 @@ services:
       - MYSQL_ROOT_PASSWORD=$DB_PASS
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
-      - $d
+      - $DB_PORT:3306
+    
     
