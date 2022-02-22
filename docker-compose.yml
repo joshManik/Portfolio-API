@@ -9,13 +9,11 @@ services:
       - MYSQL_DATABASE=$DB_NAME
     ports:
       - $DB_PORT:$DB_PORT
-    volumes:
-      - db:/var/lib/mysql
   
   express:
     depends_on:
       - mysqldb
-    image: portfolioapi
+    image: portfolioapi:latest
     env_file:
       - ./.env
 
