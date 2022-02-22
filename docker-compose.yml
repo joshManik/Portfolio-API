@@ -13,9 +13,12 @@ services:
   express:
     depends_on:
       - mysqldb
-    image: portfolioapi:latest
+    build: 
+      dockerfile: dockerfile
     env_file:
       - ./.env
+    links:
+      - "mysqldb:database"
 
 
     
