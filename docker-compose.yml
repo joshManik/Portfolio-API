@@ -2,29 +2,20 @@ version: '3.8'
 services:
   mysqldb:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
       - MYSQL_DATABASE=$DB_NAME
-      - MYSQL_ROOT_HOST=localhost
     ports:
       - 33:3306
-    networks:
-      - backend
   
   express:
     depends_on:
-      - mysqldb
-    build: 
-      dockerfile: dockerfile
+      - mysqldb 
+    image: portfolioapi:06
     env_file:
       - ./.env
-    networks:
-      - backend
-networks:
-  backend:
 
 
 
