@@ -1,22 +1,31 @@
 version: '3.8'
 services:
-  mysqldb:
+  db:
     image: mysql
-    restart: unless-stopped
-    env_file: ./.env
+    cap_add:
+      - SYS_NICE
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
-      - MYSQL_DATABASE=$DB_NAME
+      - MYSQL_DATABASE=quotes
+      - MYSQL_ROOT_PASSWORD=pass
     ports:
-      - 33:3306
-  
-  express:
-    depends_on:
-      - mysqldb 
+      - '33:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  api:
+    container_name: quotes-api
     image: portfolioapi:06
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
     env_file:
       - ./.env
-
-
-
-    
+    links:
+      - db
+    volumes:
+      - ./uploads:/uploads
+volumes:
+  db:
+    driver: local

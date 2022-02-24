@@ -22,7 +22,7 @@ const DB = mysql.createConnection({
     port : 3306
 })
 
-DB.connect()
+// DB.connect()
 
 // Create Inital Tables upon start
 
