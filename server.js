@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const multer = require('multer');
 
-const uploader = multer({ dest : './uploads'});
+const uploader = multer({ dest : './vol'});
 
 const app = express();
 
