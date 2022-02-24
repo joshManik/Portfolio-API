@@ -26,15 +26,15 @@ const DB = mysql.createConnection({
 
 // Create Inital Tables upon start
 
-const initialQuery = `CREATE TABLE IF NOT EXISTS ${DB_TABLE} (
-    id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    path VARCHAR(255) NOT NULL
-)`
-DB.query(initialQuery, (err) => {
-    if (err) throw err;
-    console.log("Created inital table")
-});
+// const initialQuery = `CREATE TABLE IF NOT EXISTS ${DB_TABLE} (
+//     id INT PRIMARY KEY UNIQUE AUTO_INCREMENT,
+//     title VARCHAR(255) NOT NULL,
+//     path VARCHAR(255) NOT NULL
+// )`
+// DB.query(initialQuery, (err) => {
+//     if (err) throw err;
+//     console.log("Created inital table")
+// });
 
 app.get('/pastproject/:id', (req, res) => {
     QUERY = `SELECT * FROM ${DB_TABLE} WHERE id = ${req.params.id}`

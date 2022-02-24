@@ -15,7 +15,7 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
   api:
     container_name: quotes-api
-    image: portfolioapi:06
+    image: portfolioapi:08
     depends_on:
       - db
     ports:
