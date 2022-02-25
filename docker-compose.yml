@@ -12,7 +12,6 @@ services:
       - '33:3306'
     networks:
       default:
-        ipv4_address: 192.168.213.0
 
     
   api:
@@ -26,13 +25,10 @@ services:
       - ./.env
     networks:
       default:
-        ipv4_address: 192.168.123.0
 
 
 networks:
   default:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.123.0/24
+
 
