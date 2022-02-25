@@ -6,12 +6,11 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_DATABASE=quotes
+      - MYSQL_DATABASE=portfolio
       - MYSQL_ROOT_PASSWORD=pass
     ports:
       - '33:3306'
-    networks:
-      default:
+    network_mode: bridge
 
     
   api:
@@ -23,12 +22,8 @@ services:
       - 3000:3000
     env_file:
       - ./.env
-    networks:
-      default:
+    network_mode: bridge
 
 
-networks:
-  default:
-    driver: bridge
 
 
