@@ -21,10 +21,12 @@ services:
       - db
     restart: always
     ports:
-      - 3000:3000
+      - 4000:4000
     env_file:
       - ./.env
     network_mode: bridge
+    volumes:
+      - C:/Users/JoshManik/Photos:/vol
 
   react:
     container_name: REACT
