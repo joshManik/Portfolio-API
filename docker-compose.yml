@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   db:
+    container_name: DB
     image: mysql
     cap_add:
       - SYS_NICE
@@ -23,6 +24,17 @@ services:
       - 3000:3000
     env_file:
       - ./.env
+    network_mode: bridge
+
+  react:
+    container_name: REACT
+    image: portfoliofrontend:05
+    depends_on:
+      - db
+      - api
+    restart: always
+    ports:
+      - "8080:80"
     network_mode: bridge
 
 
