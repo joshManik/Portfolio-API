@@ -10,22 +10,29 @@ services:
       - MYSQL_ROOT_PASSWORD=pass
     ports:
       - '33:3306'
-    volumes:
-      - db:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      default:
+        ipv4_address: 192.168.213.0
+
+    
   api:
-    container_name: quotes-api
-    image: portfolioapi:11
+    container_name: API
+    image: portfolioapi:13
     depends_on:
       - db
     ports:
       - 3000:3000
     env_file:
       - ./.env
-    links:
-      - db
-    volumes:
-      - ./uploads:/uploads
-volumes:
-  db:
-    driver: local
+    networks:
+      default:
+        ipv4_address: 192.168.123.0
+
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.123.0/24
+
